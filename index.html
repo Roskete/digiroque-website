@@ -4,41 +4,1317 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DIGIROQUE | Consultoría en IA, DeFi y Automatización para PYMES</title>
-  <meta name="description" content="DIGIROQUE - Potenciando PYMES con Inteligencia Artificial, DeFi, Comercio Online y Automatización con Agentes de IA.">
+  <meta name="description" content="DIGIROQUE potencia tu PYME con Inteligencia Artificial, DeFi, Comercio Online y Automatización con Agentes de IA. Más ventas, menos trabajo manual.">
   <meta name="author" content="Roque Jiménez">
 
+  <!-- Open Graph -->
   <meta property="og:title" content="DIGIROQUE | Consultoría en IA para PYMES">
-  <meta property="og:description" content="Potenciando PYMES con Inteligencia Artificial, DeFi y Automatización.">
+  <meta property="og:description" content="Potenciando PYMES con Inteligencia Artificial, DeFi y Automatización. Consulta gratuita.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/logo-main.jpg">
 
+  <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="assets/images/logo-main.jpg">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Inter',system-ui,sans-serif;background:#0a0012;color:#e0e0e0;overflow-x:hidden}
-    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem}
-  </style>
+    /* ========================================
+       CSS VARIABLES — Brand DIGIROQUE
+       ======================================== */
+    :root {
+      --primary: #800020;
+      --accent: #c00030;
+      --accent2: #a02040;
+      --accent-light: #d44060;
+      --bg-dark: #0a0012;
+      --bg-deep: #060010;
+      --bg-card: #12001e;
+      --bg-card-hover: #1a002e;
+      --bg-surface: #0f0018;
+      --text: #e0e0e0;
+      --text-muted: #9a8aaa;
+      --text-dim: #6a5a7a;
+      --white: #ffffff;
+      --gradient: linear-gradient(135deg, #800020, #c00030, #a02040);
+      --gradient-soft: linear-gradient(135deg, rgba(128,0,32,0.15), rgba(192,0,48,0.08));
+      --gradient-border: linear-gradient(135deg, #800020, #c00030);
+      --blur: blur(20px);
+      --radius: 14px;
+      --radius-sm: 8px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 10px rgba(128,0,32,0.1);
+      --shadow-md: 0 8px 30px rgba(128,0,32,0.15);
+      --shadow-lg: 0 16px 50px rgba(128,0,32,0.2);
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  <link rel="stylesheet" href="style.css">
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 80px; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 0%, rgba(128,0,32,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(160,32,64,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    section { position: relative; z-index: 1; }
+
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+
+    /* ========================================
+       HEADER
+       ======================================== */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: var(--transition);
+    }
+    .header.scrolled {
+      background: rgba(10, 0, 18, 0.85);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      box-shadow: 0 2px 30px rgba(128,0,32,0.15);
+    }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      transition: var(--transition);
+    }
+    .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header.scrolled .logo-img { height: 34px; }
+    .header.scrolled .logo-text { font-size: 1.3rem; }
+
+    .nav { display: flex; gap: 2rem; align-items: center; }
+    .nav a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gradient);
+      transition: var(--transition);
+    }
+    .nav a:hover { color: var(--white); }
+    .nav a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 0.55rem 1.5rem !important;
+      background: var(--gradient) !important;
+      color: var(--white) !important;
+      border-radius: 50px !important;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 26px; height: 2px;
+      background: var(--text);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative gradient orbs */
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(128,0,32,0.2) 0%, transparent 70%);
+      top: -200px; right: -200px;
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(192,0,48,0.12) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      border-radius: 50%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -20px); }
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid rgba(192,0,48,0.35);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-light);
+      margin-bottom: 2rem;
+      background: rgba(192,0,48,0.06);
+      backdrop-filter: blur(10px);
+      letter-spacing: 0.5px;
+    }
+    .hero-badge .pulse {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero h1 .line { display: block; }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 1rem;
+      line-height: 1.8;
+    }
+
+    .hero-value-prop {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .hero-value-prop .check {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.5rem;
+      background: var(--gradient);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #a02040, #d01040, #c00030);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(192,0,48,0.4);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary span { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.5rem; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 50px;
+      border: 1px solid rgba(128,0,32,0.4);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(128,0,32,0.1);
+      transform: translateY(-2px);
+    }
+
+    .hero-social-proof {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .hero-social-proof .avatars {
+      display: flex;
+    }
+    .hero-social-proof .avatars .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--bg-dark);
+      margin-left: -10px;
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .hero-social-proof .avatars .avatar:first-child { margin-left: 0; }
+    .hero-social-proof .proof-text {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+    .hero-social-proof .proof-text strong { color: var(--text); }
+
+    /* ========================================
+       SECTION COMMONS
+       ======================================== */
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .section-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.3px;
+    }
+    .section-header h2 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(128,0,32,0.3), transparent);
+      margin: 0;
+    }
+
+    /* ========================================
+       BENEFITS SECTION
+       ======================================== */
+    .benefits {
+      padding: 6rem 0;
+      background: var(--bg-deep);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .benefit-card {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(128,0,32,0.12);
+      background: var(--bg-card);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192,0,48,0.3);
+      box-shadow: var(--shadow-lg);
+    }
+    .benefit-card:hover::before { transform: scaleX(1); }
+
+    .benefit-icon {
+      width: 64px; height: 64px;
+      background: var(--gradient-soft);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .benefit-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .benefit-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .benefit-result {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 1rem;
+      background: rgba(192,0,48,0.1);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-light);
+    }
+
+    /* ========================================
+       WHY CHOOSE US
+       ======================================== */
+    .why-us {
+      padding: 6rem 0;
+    }
+
+    .why-us-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .why-us-content h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+    .why-us-content h3 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .why-us-content > p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .why-us-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .why-feature {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .why-feature-icon {
+      width: 48px; height: 48px;
+      min-width: 48px;
+      background: var(--gradient-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .why-feature-text h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .why-feature-text p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .why-us-visual {
+      position: relative;
+    }
+    .why-us-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.2);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-us-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient);
+    }
+    .why-us-card .card-stat {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .why-us-card .card-stat .big-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .why-us-card .card-stat .label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+    .why-us-card .card-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .why-us-card .mini-stat {
+      text-align: center;
+      padding: 1.2rem;
+      background: rgba(128,0,32,0.08);
+      border-radius: var(--radius-sm);
+    }
+    .why-us-card .mini-stat .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .why-us-card .mini-stat .lbl {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+
+    /* ========================================
+       SERVICES
+       ======================================== */
+    .services {
+      padding: 6rem 0;
+      background: var(--bg-deep);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.15);
+      border-radius: var(--radius);
+      padding: 2.2rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    .service-card:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(192,0,48,0.35);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      background: rgba(128,0,32,0.12);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .service-card .service-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.25rem 0.8rem;
+      border: 1px solid rgba(192,0,48,0.25);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      color: var(--accent-light);
+      font-weight: 600;
+    }
+
+    /* ========================================
+       TESTIMONIALS
+       ======================================== */
+    .testimonials {
+      padding: 6rem 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.12);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: var(--transition);
+      position: relative;
+    }
+    .testimonial-card:hover {
+      border-color: rgba(192,0,48,0.3);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 0.2rem;
+      margin-bottom: 1rem;
+    }
+    .testimonial-stars .star { color: #f5a623; font-size: 0.9rem; }
+
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .testimonial-text::before { content: '"'; color: var(--accent); font-size: 1.5rem; font-weight: 700; }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .testimonial-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    .testimonial-info .name {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .testimonial-info .role {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ========================================
+       PRICING / PLANS
+       ======================================== */
+    .pricing {
+      padding: 6rem 0;
+      background: var(--bg-deep);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.12);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(180deg, rgba(128,0,32,0.08) 0%, var(--bg-card) 100%);
+    }
+    .pricing-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gradient);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      padding: 0.3rem 1.2rem;
+      background: var(--gradient);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-price {
+      margin-bottom: 2rem;
+    }
+    .pricing-price .amount {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .pricing-price .period {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    .pricing-features {
+      flex: 1;
+      margin-bottom: 2rem;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .pricing-features li .check-icon {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .pricing-features li.disabled {
+      color: var(--text-dim);
+      opacity: 0.5;
+    }
+    .pricing-features li.disabled .check-icon { color: var(--text-dim); }
+
+    .pricing-btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      text-align: center;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: inherit;
+    }
+    .pricing-btn.primary {
+      background: var(--gradient);
+      color: var(--white);
+    }
+    .pricing-btn.primary:hover {
+      box-shadow: 0 8px 30px rgba(192,0,48,0.4);
+      transform: translateY(-2px);
+    }
+    .pricing-btn.outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(128,0,32,0.3);
+    }
+    .pricing-btn.outline:hover {
+      border-color: var(--accent);
+      background: rgba(128,0,32,0.1);
+    }
+
+    /* ========================================
+       FAQ
+       ======================================== */
+    .faq {
+      padding: 6rem 0;
+    }
+
+    .faq-list { max-width: 750px; margin: 0 auto; }
+
+    .faq-item {
+      border: 1px solid rgba(128,0,32,0.15);
+      border-radius: var(--radius);
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .faq-item:hover { border-color: rgba(192,0,48,0.3); }
+
+    .faq-question {
+      width: 100%;
+      padding: 1.3rem 1.5rem;
+      background: var(--bg-card);
+      border: none;
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .faq-question:hover { background: var(--bg-card-hover); }
+
+    .faq-question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--accent);
+      transition: var(--transition);
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .faq-item.active .faq-answer { max-height: 400px; }
+    .faq-answer p {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* ========================================
+       CONTACT
+       ======================================== */
+    .contact {
+      padding: 6rem 0;
+      background: var(--bg-deep);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .contact-info h3 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .contact-info > p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.12);
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .contact-method:hover {
+      border-color: rgba(192,0,48,0.3);
+      transform: translateX(4px);
+    }
+    .contact-method .method-icon {
+      width: 40px; height: 40px;
+      background: var(--gradient-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .contact-method .method-text .label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .contact-method .method-text .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .contact-form-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.15);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+    }
+    .contact-form-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .contact-form-card .form-subtitle {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.9rem 1.2rem;
+      background: var(--bg-surface);
+      border: 1px solid rgba(128,0,32,0.2);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-dim);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(192,0,48,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239a8aaa' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-group select option {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .form-submit .btn-primary { flex: 1; justify-content: center; }
+    .form-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      border-top: 1px solid rgba(128,0,32,0.15);
+      padding: 3rem 0 2rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+    .footer-brand .logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+      margin-bottom: 0.8rem;
+    }
+    .footer-brand p {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .footer-col h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .footer-col a {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      padding: 0.3rem 0;
+      transition: var(--transition);
+    }
+    .footer-col a:hover { color: var(--accent); transform: translateX(3px); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(128,0,32,0.1);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+    .footer-social {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(128,0,32,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      transition: var(--transition);
+    }
+    .footer-social a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+    @media (max-width: 1024px) {
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-card:last-child { grid-column: 1 / -1; max-width: 400px; margin: 0 auto; }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+
+      .nav {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 75%; max-width: 300px;
+        height: 100vh;
+        background: rgba(10, 0, 18, 0.98);
+        backdrop-filter: var(--blur);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        transition: var(--transition);
+        padding: 2rem;
+      }
+      .nav.open { right: 0; }
+      .nav a { font-size: 1.1rem; }
+
+      .hero h1 { font-size: 2.2rem; }
+
+      .benefits-grid { grid-template-columns: 1fr; }
+      .why-us-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-us-visual { order: -1; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .pricing-card:last-child { max-width: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-social-proof { flex-direction: column; }
+    }
+
+    /* ========================================
+       SCROLL-TO-TOP
+       ======================================== */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      width: 44px; height: 44px;
+      background: var(--gradient);
+      border: none;
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scroll-top:hover {
+      box-shadow: 0 8px 30px rgba(192,0,48,0.4);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- ==========================================
+       HEADER
+       ========================================== -->
   <header class="header" id="header">
     <div class="container">
       <a href="#" class="logo">
-        <img src="assets/images/header-banner.png" alt="" class="logo-img">
+        <img src="assets/images/header-banner.png" alt="DIGIROQUE" class="logo-img">
         <span class="logo-text">DIGIROQUE</span>
       </a>
       <nav class="nav" id="nav">
+        <a href="#beneficios">Beneficios</a>
         <a href="#servicios">Servicios</a>
-        <a href="#nosotros">Nosotros</a>
+        <a href="#planes">Planes</a>
         <a href="#faq">FAQ</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#contacto" class="nav-cta">Consultar Gratis</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -46,83 +1322,260 @@
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
   <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="hero-badge fade-in">🚀 Consultoría Especializada en PYMES</div>
-      <h1 class="fade-in slide-up">Potenciando PYMES con<br><span>Inteligencia Artificial</span></h1>
-      <p class="fade-in slide-up-delay">Implementamos soluciones de IA, DeFi, comercio online y automatización con agentes autónomos para impulsar el crecimiento de tu negocio.</p>
-      <a href="#contacto" class="btn fade-in slide-up-delay2"><span>Comenzar Ahora</span></a>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge fade-in">
+          <span class="pulse"></span>
+          Consultoría Especializada en PYMES
+        </div>
+        <h1 class="fade-in delay-1">
+          <span class="line">Haz que tu negocio trabaje</span>
+          <span class="line"><span>más inteligente</span>, no más</span>
+        </h1>
+        <p class="hero-subtitle fade-in delay-2">
+          Implementamos Inteligencia Artificial, automatización y estrategias digitales que multiplican tus ventas y liberan tu tiempo para enfocarte en lo que realmente importa.
+        </p>
+        <div class="hero-value-prop fade-in delay-2">
+          <span class="check">✓</span> Consulta diagnóstica gratuita
+          <span class="check" style="margin-left:0.5rem">✓</span> Resultados desde la primera semana
+        </div>
+        <div class="hero-buttons fade-in delay-3">
+          <a href="#contacto" class="btn-primary">
+            <span>Agendar Consulta Gratis →</span>
+          </a>
+          <a href="#servicios" class="btn-secondary">
+            Ver Servicios
+          </a>
+        </div>
+        <div class="hero-social-proof fade-in delay-4">
+          <div class="avatars">
+            <div class="avatar">RC</div>
+            <div class="avatar">ML</div>
+            <div class="avatar">JS</div>
+            <div class="avatar">+</div>
+          </div>
+          <span class="proof-text">Más de <strong>100+ PYMES</strong> ya transformaron su negocio</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Services -->
+  <!-- ==========================================
+       BENEFITS — Results & Transformation
+       ========================================== -->
+  <section class="benefits" id="beneficios">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label fade-in">Resultados Reales</span>
+        <h2 class="fade-in delay-1">¿Qué obtienes al <span>trabajar con nosotros</span>?</h2>
+        <p class="fade-in delay-2">No vendemos tecnología por venderla. Cada solución está diseñada para generar un impacto medible en tu negocio.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card fade-in delay-1">
+          <div class="benefit-icon">⚡</div>
+          <h3>Velocidad Operativa</h3>
+          <p>Automatiza tareas repetitivas y reduce tiempos de procesamiento hasta en un 70%. Tu equipo se enfoca en estrategia, no en papeleo.</p>
+          <span class="benefit-result">+70% eficiencia</span>
+        </div>
+        <div class="benefit-card fade-in delay-2">
+          <div class="benefit-icon">📈</div>
+          <h3>Más Ventas, Menos Esfuerzo</h3>
+          <p>Chatbots inteligentes, embudos automatizados y análisis predictivo que convierten prospectos en clientes 24/7.</p>
+          <span class="benefit-result">+40% conversiones</span>
+        </div>
+        <div class="benefit-card fade-in delay-3">
+          <div class="benefit-icon">🎯</div>
+          <h3>Decisiones con Datos</h3>
+          <p>Dashboards e inteligencia artificial que transforman datos crudos en insights accionables para tomar mejores decisiones.</p>
+          <span class="benefit-result">100% data-driven</span>
+        </div>
+        <div class="benefit-card fade-in delay-1">
+          <div class="benefit-icon">💰</div>
+          <h3>Reducción de Costos</h3>
+          <p>Reduce costos operativos entre un 30-50% automatizando procesos que antes requerían personal dedicado.</p>
+          <span class="benefit-result">-30% costos operativos</span>
+        </div>
+        <div class="benefit-card fade-in delay-2">
+          <div class="benefit-icon">🔄</div>
+          <h3>Escalabilidad Automática</h3>
+          <p>Sistemas que crecen contigo. Desde 10 clientes hasta 10,000 sin necesidad de contratar proporcionalmente más personal.</p>
+          <span class="benefit-result">Escalable ilimitado</span>
+        </div>
+        <div class="benefit-card fade-in delay-3">
+          <div class="benefit-icon">🛡️</div>
+          <h3>Presencia Digital 24/7</h3>
+          <p>Tu negocio nunca cierra. Agentes de IA atienden, venden y resuelven dudas mientras duermes.</p>
+          <span class="benefit-result">365 días activo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ==========================================
+       WHY CHOOSE US
+       ========================================== -->
+  <section class="why-us" id="nosotros">
+    <div class="container">
+      <div class="why-us-grid">
+        <div class="why-us-content fade-in">
+          <span class="section-label">¿Por Qué DIGIROQUE?</span>
+          <h3>Tecnología avanzada,<br><span>implementación simple</span></h3>
+          <p>No necesitas ser experto en tecnología. Nosotros nos encargamos de toda la implementación mientras tú te enfocas en hacer crecer tu negocio. Nuestro enfoque es práctico, orientado a resultados y sin jerga técnica innecesaria.</p>
+          <div class="why-us-features">
+            <div class="why-feature">
+              <div class="why-feature-icon">🏆</div>
+              <div class="why-feature-text">
+                <h4>Experiencia Comprobada</h4>
+                <p>Más de 6 años combinando logística, tecnología y estrategia de negocio para PYMES reales.</p>
+              </div>
+            </div>
+            <div class="why-feature">
+              <div class="why-feature-icon">🤝</div>
+              <div class="why-feature-text">
+                <h4>Enfoque Personalizado</h4>
+                <p>Cada negocio es único. Diagnosticamos tu situación específica y diseñamos soluciones a tu medida.</p>
+              </div>
+            </div>
+            <div class="why-feature">
+              <div class="why-feature-icon">📊</div>
+              <div class="why-feature-text">
+                <h4>Resultados Medibles</h4>
+                <p>Trabajamos con métricas claras. Sabrás exactamente el ROI de cada inversión desde el primer mes.</p>
+              </div>
+            </div>
+            <div class="why-feature">
+              <div class="why-feature-icon">⚡</div>
+              <div class="why-feature-text">
+                <h4>Implementación Rápida</h4>
+                <p>Resultados desde la primera semana. No meses de espera para ver impacto real en tu negocio.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="why-us-visual fade-in delay-2">
+          <div class="why-us-card">
+            <div class="card-stat">
+              <div class="big-number">100+</div>
+              <div class="label">PYMES Transformadas</div>
+            </div>
+            <div class="card-stats-row">
+              <div class="mini-stat">
+                <div class="num">6+</div>
+                <div class="lbl">Años de Experiencia</div>
+              </div>
+              <div class="mini-stat">
+                <div class="num">98%</div>
+                <div class="lbl">Clientes Satisfechos</div>
+              </div>
+              <div class="mini-stat">
+                <div class="num">24/7</div>
+                <div class="lbl">Soporte Continuo</div>
+              </div>
+              <div class="mini-stat">
+                <div class="num">4+</div>
+                <div class="lbl">Áreas de Expertise</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SERVICES
+       ========================================== -->
   <section class="services" id="servicios">
     <div class="container">
-      <div class="section-title">
-        <h2 class="fade-in">Nuestros <span>Servicios</span></h2>
-        <p class="fade-in slide-up">Soluciones tecnológicas diseñadas para PYMES que buscan crecer con inteligencia.</p>
+      <div class="section-header">
+        <span class="section-label fade-in">Nuestros Servicios</span>
+        <h2 class="fade-in delay-1">Soluciones que <span>transforman negocios</span></h2>
+        <p class="fade-in delay-2">Tecnología avanzada aplicada de forma práctica para que tu PYME crezca sin complicaciones.</p>
       </div>
       <div class="services-grid">
-        <!-- AI -->
-        <div class="service-card fade-in slide-up">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><path d="M9 21h6"/><path d="M10 21v1"/><path d="M14 21v1"/><circle cx="9" cy="8" r="1" fill="currentColor"/><circle cx="15" cy="8" r="1" fill="currentColor"/><path d="M12 12v2"/></svg>
-          </div>
+        <div class="service-card fade-in delay-1">
+          <div class="service-icon">🤖</div>
           <h3>Inteligencia Artificial</h3>
-          <p>Implementación y consultoría en IA: modelos personalizados, chatbots inteligentes, análisis predictivo y procesamiento de datos.</p>
+          <p>Chatbots que venden, modelos que predicen demanda, sistemas que analizan datos y toman decisiones inteligentes por ti.</p>
+          <span class="service-tag">Más demandado</span>
         </div>
-        <!-- DeFi -->
-        <div class="service-card fade-in slide-up-delay">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M9 9.5a3 3 0 1 1 4.5 2.5c-.8.5-1.5 1.2-1.5 2a2 2 0 1 1-4 0"/></svg>
-          </div>
+        <div class="service-card fade-in delay-2">
+          <div class="service-icon">⛓️</div>
           <h3>DeFi y Blockchain</h3>
-          <p>Finanzas descentralizadas aplicadas a tu negocio. Tokenización, pagos digitales y estrategias blockchain para PYMES.</p>
+          <p>Pagos digitales sin intermediarios, contratos inteligentes y estrategias de finanzas descentralizadas para tu negocio.</p>
+          <span class="service-tag">Futuro financiero</span>
         </div>
-        <!-- E-commerce -->
-        <div class="service-card fade-in slide-up-delay2">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          </div>
+        <div class="service-card fade-in delay-3">
+          <div class="service-icon">🛒</div>
           <h3>Comercio Online</h3>
-          <p>Estrategias digitales de venta, optimización de tiendas virtuales, marketing automation y growth hacking para e-commerce.</p>
+          <p>Tiendas virtuales optimizadas, marketing automation y estrategias de crecimiento que convierten visitantes en compradores.</p>
+          <span class="service-tag">Venta inmediata</span>
         </div>
-        <!-- Automation -->
-        <div class="service-card fade-in slide-up-delay3">
-          <div class="service-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/><path d="M8 21l1-3"/><path d="M16 21l-1-3"/></svg>
-          </div>
+        <div class="service-card fade-in delay-4">
+          <div class="service-icon">⚙️</div>
           <h3>Automatización con Agentes IA</h3>
-          <p>Agentes autónomos que ejecutan tareas complejas: atención al cliente, generación de contenido, gestión de inventario y más.</p>
+          <p>Agentes autónomos que atienden clientes, generan contenido, gestionan inventario y ejecutan tareas complejas por ti.</p>
+          <span class="service-tag">Productividad x10</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
-  <section class="about" id="nosotros">
+  <div class="divider"></div>
+
+  <!-- ==========================================
+       TESTIMONIALS
+       ========================================== -->
+  <section class="testimonials" id="testimonios">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-image fade-in">
-          <img src="assets/images/logo-alt.jpg" alt="DIGIROQUE Logo">
+      <div class="section-header">
+        <span class="section-label fade-in">Testimonios</span>
+        <h2 class="fade-in delay-1">Lo que dicen nuestros <span>clientes</span></h2>
+        <p class="fade-in delay-2">Historias reales de negocios que transformaron sus resultados con DIGIROQUE.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in delay-1">
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="testimonial-text">Implementamos un chatbot inteligente que atiende a nuestros clientes 24/7. Las ventas online aumentaron un 45% en el primer trimestre. Increíble.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MC</div>
+            <div class="testimonial-info">
+              <div class="name">María Castillo</div>
+              <div class="role">Dueña de Tienda Online de Moda</div>
+            </div>
+          </div>
         </div>
-        <div class="about-text fade-in slide-up">
-          <h2>Sobre <span>DIGIROQUE</span></h2>
-          <p>DIGIROQUE nace de la necesidad de las PYMES de acceder a tecnologías avanzadas sin complejidad. Somos especialistas en implementar soluciones de IA prácticas y efectivas.</p>
-          <p>Nuestro enfoque combina conocimiento técnico profundo con una visión estratégica orientada a resultados, haciendo que la tecnología más avanzada sea accesible para negocios de todos los tamaños.</p>
-          <div class="about-stats">
-            <div>
-              <div class="stat-number">100+</div>
-              <div class="stat-label">PYMES Atendidas</div>
+        <div class="testimonial-card fade-in delay-2">
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="testimonial-text">Pasé de perder 3 horas diarias en tareas administrativas a tener todo automatizado. Ahora uso ese tiempo para conseguir más clientes. DIGIROQUE cambió mi negocio.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RL</div>
+            <div class="testimonial-info">
+              <div class="name">Roberto López</div>
+              <div class="role">Gerente de Distribuidora Regional</div>
             </div>
-            <div>
-              <div class="stat-number">4+</div>
-              <div class="stat-label">Áreas de Expertise</div>
-            </div>
-            <div>
-              <div class="stat-number">24/7</div>
-              <div class="stat-label">Soporte Continuo</div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in delay-3">
+          <div class="testimonial-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p class="testimonial-text">Lo que más me gustó es que explicaron todo en lenguaje simple. No necesitaba ser experto en tecnología. En 2 semanas ya estábamos viendo resultados reales.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AS</div>
+            <div class="testimonial-info">
+              <div class="name">Ana Soto</div>
+              <div class="role">Directora de Restaurante</div>
             </div>
           </div>
         </div>
@@ -130,80 +1583,272 @@
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- ==========================================
+       PRICING / PLANS
+       ========================================== -->
+  <section class="pricing" id="planes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label fade-in">Planes y Paquetes</span>
+        <h2 class="fade-in delay-1">Elige el plan que <span>tu negocio necesita</span></h2>
+        <p class="fade-in delay-2">Soluciones flexibles diseñadas para cada etapa de tu negocio. Sin contratos largos, sin sorpresas.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- Plan Starter -->
+        <div class="pricing-card fade-in delay-1">
+          <div class="pricing-name">Starter</div>
+          <div class="pricing-desc">Ideal para negocios que dan el primer paso hacia la digitalización.</div>
+          <div class="pricing-price">
+            <span class="amount">$299</span>
+            <span class="period">/ mes</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check-icon">✓</span> Chatbot IA para atención al cliente</li>
+            <li><span class="check-icon">✓</span> Configuración de redes sociales</li>
+            <li><span class="check-icon">✓</span> Landing page profesional</li>
+            <li><span class="check-icon">✓</span> Consultoría inicial (1 sesión)</li>
+            <li><span class="check-icon">✓</span> Soporte por email</li>
+            <li class="disabled"><span class="check-icon">—</span> Automatización avanzada</li>
+            <li class="disabled"><span class="check-icon">—</span> Agentes autónomos IA</li>
+          </ul>
+          <a href="#contacto" class="pricing-btn outline">Empezar Ahora</a>
+        </div>
+
+        <!-- Plan Professional (Featured) -->
+        <div class="pricing-card featured fade-in delay-2">
+          <span class="pricing-badge">MÁS POPULAR</span>
+          <div class="pricing-name">Professional</div>
+          <div class="pricing-desc">Para negocios que quieren crecer rápido con tecnología completa.</div>
+          <div class="pricing-price">
+            <span class="amount">$599</span>
+            <span class="period">/ mes</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check-icon">✓</span> Todo lo del plan Starter</li>
+            <li><span class="check-icon">✓</span> Automatización de procesos (5 flujos)</li>
+            <li><span class="check-icon">✓</span> Análisis predictivo de ventas</li>
+            <li><span class="check-icon">✓</span> Estrategia de marketing digital</li>
+            <li><span class="check-icon">✓</span> Optimización de tienda online</li>
+            <li><span class="check-icon">✓</span> Soporte prioritario 24/7</li>
+            <li><span class="check-icon">✓</span> 1 agente IA autónomo</li>
+          </ul>
+          <a href="#contacto" class="pricing-btn primary">Elegir Professional</a>
+        </div>
+
+        <!-- Plan Enterprise -->
+        <div class="pricing-card fade-in delay-3">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-desc">Transformación digital completa para negocios ambiciosos.</div>
+          <div class="pricing-price">
+            <span class="amount">$999</span>
+            <span class="period">/ mes</span>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check-icon">✓</span> Todo lo del plan Professional</li>
+            <li><span class="check-icon">✓</span> Automatización ilimitada</li>
+            <li><span class="check-icon">✓</span> Múltiples agentes IA autónomos</li>
+            <li><span class="check-icon">✓</span> Integración DeFi/blockchain</li>
+            <li><span class="check-icon">✓</span> Dashboard de analytics avanzado</li>
+            <li><span class="check-icon">✓</span> Consultor estratégico dedicado</li>
+            <li><span class="check-icon">✓</span> SLA garantizado</li>
+          </ul>
+          <a href="#contacto" class="pricing-btn outline">Contactar Ventas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ==========================================
+       FAQ
+       ========================================== -->
   <section class="faq" id="faq">
     <div class="container">
-      <div class="section-title">
-        <h2 class="fade-in">Preguntas <span>Frecuentes</span></h2>
-        <p class="fade-in slide-up">Resolvemos tus dudas sobre nuestros servicios.</p>
+      <div class="section-header">
+        <span class="section-label fade-in">Preguntas Frecuentes</span>
+        <h2 class="fade-in delay-1">Resolvemos tus <span>dudas</span></h2>
+        <p class="fade-in delay-2">Las preguntas que más nos hacen nuestros clientes antes de empezar.</p>
       </div>
       <div class="faq-list">
-        <div class="faq-item fade-in slide-up">
-          <button class="faq-question">¿Qué es DIGIROQUE?</button>
-          <div class="faq-answer"><p>DIGIROQUE es una consultoría especializada en tecnología para PYMES. Ofrecemos implementación de inteligencia artificial, soluciones DeFi, estrategias de comercio online y automatización con agentes de IA, todo enfocado en generar valor real para tu negocio.</p></div>
+        <div class="faq-item fade-in delay-1">
+          <button class="faq-question">¿Necesito conocimientos técnicos para trabajar con ustedes?</button>
+          <div class="faq-answer"><p>Para nada. Todo nuestro proceso está diseñado para que no necesites saber nada de tecnología. Nosotros nos encargamos de toda la implementación técnica y te explicamos todo en un lenguaje simple y claro. Tu solo enfócate en tu negocio.</p></div>
         </div>
-        <div class="faq-item fade-in slide-up-delay">
-          <button class="faq-question">¿Cómo implementan IA en un negocio?</button>
-          <div class="faq-answer"><p>Comenzamos con un diagnóstico completo de tu operación, identificamos oportunidades donde la IA puede generar impacto, y luego implementamos soluciones personalizadas — desde chatbots hasta sistemas predictivos — con acompañamiento continuo.</p></div>
+        <div class="faq-item fade-in delay-2">
+          <button class="faq-question">¿Cuánto tiempo tarda en verse resultados?</button>
+          <div class="faq-answer"><p>La mayoría de nuestros clientes ven resultados en las primeras 2 semanas. Algunas automatizaciones generan impacto inmediato (como chatbots atendiendo clientes 24/7), mientras que estrategias más complejas pueden tomar 30-60 días para madurar completamente.</p></div>
         </div>
-        <div class="faq-item fade-in slide-up-delay2">
-          <button class="faq-question">¿Trabajan con pequeñas empresas?</button>
-          <div class="faq-answer"><p>¡Absolutamente! DIGIROQUE fue creado especialmente para PYMES. Nuestras soluciones son escalables y se adaptan al presupuesto y necesidades de negocios pequeños y medianos. La tecnología avanzada no debe ser exclusiva de las grandes empresas.</p></div>
+        <div class="faq-item fade-in delay-3">
+          <button class="faq-question">¿Trabajan con negocios pequeños o solo grandes empresas?</button>
+          <div class="faq-answer"><p>DIGIROQUE fue creado específicamente para PYMES. Sabemos que los negocios pequeños tienen presupuestos limitados, por eso nuestros planes están diseñados para ser accesibles y escalables. La tecnología avanzada no debería ser exclusiva de las grandes corporaciones.</p></div>
         </div>
-        <div class="faq-item fade-in slide-up-delay3">
-          <button class="faq-question">¿Cuál es el proceso para comenzar?</button>
-          <div class="faq-answer"><p>El proceso inicia con una consulta gratuita donde evaluamos tu situación. Luego presentamos una propuesta personalizada, acordamos el alcance y comenzamos la implementación con entregas iterativas para que veas resultados desde las primeras semanas.</p></div>
+        <div class="faq-item fade-in delay-4">
+          <button class="faq-question">¿Qué pasa si no me gusta el servicio?</button>
+          <div class="faq-answer"><p>Ofrecemos una garantía de satisfacción de 30 días. Si en ese periodo no ves el valor que esperabas, te devolvemos tu dinero sin preguntas. Queremos que te quedes porque estás convencido, no porque tengas miedo de cambiar.</p></div>
+        </div>
+        <div class="faq-item fade-in delay-5">
+          <button class="faq-question">¿Cómo funciona la consulta gratuita?</button>
+          <div class="faq-answer"><p>Agendamos una videollamada de 30 minutos donde analizamos tu situación actual, identificamos las principales oportunidades de mejora y te presentamos un plan de acción personalizado. Sin compromiso, sin ventas agresivas. Solo valor puro.</p></div>
+        </div>
+        <div class="faq-item fade-in delay-5">
+          <button class="faq-question">¿Puedo cambiar de plan después de contratar?</button>
+          <div class="faq-answer"><p>Por supuesto. Puedes subir o bajar de plan en cualquier momento. Si tu negocio crece y necesitas más automatización, simplemente cambias al plan superior. Si estás en un periodo tranquilo, puedes bajar temporalmente.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- ==========================================
+       CONTACT FORM
+       ========================================== -->
   <section class="contact" id="contacto">
     <div class="container">
-      <div class="section-title">
-        <h2 class="fade-in">Contacto</h2>
-        <p class="fade-in slide-up">Cuéntanos sobre tu proyecto y te responderemos pronto.</p>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <span class="section-label">Contacto</span>
+          <h3>Hablemos de tu <span>próximo nivel</span></h3>
+          <p>Cuéntanos sobre tu negocio y tus objetivos. En 24 horas te contactamos con una propuesta personalizada sin compromiso.</p>
+          <div class="contact-methods">
+            <a href="https://wa.me/56900000000" class="contact-method" target="_blank">
+              <div class="method-icon">💬</div>
+              <div class="method-text">
+                <div class="label">WhatsApp</div>
+                <div class="value">Respuesta inmediata</div>
+              </div>
+            </a>
+            <a href="mailto:hola@digiroque.com" class="contact-method">
+              <div class="method-icon">📧</div>
+              <div class="method-text">
+                <div class="label">Email</div>
+                <div class="value">hola@digiroque.com</div>
+              </div>
+            </a>
+            <div class="contact-method">
+              <div class="method-icon">🌐</div>
+              <div class="method-text">
+                <div class="label">Ubicación</div>
+                <div class="value">Chile — Trabajamos remoto</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-card fade-in delay-2">
+          <h4>📋 Solicita tu Consulta Gratuita</h4>
+          <p class="form-subtitle">Completa el formulario y te contactamos en menos de 24 horas.</p>
+          <form class="contact-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Nombre *</label>
+                <input type="text" id="name" name="name" placeholder="Tu nombre completo" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">WhatsApp / Teléfono</label>
+                <input type="tel" id="phone" name="phone" placeholder="+56 9 0000 0000">
+              </div>
+              <div class="form-group">
+                <label for="business">Tipo de Negocio</label>
+                <select id="business" name="business">
+                  <option value="">Seleccionar...</option>
+                  <option value="restaurante">Restaurante / Gastronomía</option>
+                  <option value="tienda-online">Tienda Online / E-commerce</option>
+                  <option value="servicios">Servicios Profesionales</option>
+                  <option value="distribuidora">Distribuidora / Logística</option>
+                  <option value="retail">Retail / Tienda Física</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service">¿Qué servicio te interesa?</label>
+              <select id="service" name="service">
+                <option value="">Seleccionar...</option>
+                <option value="ia">Inteligencia Artificial</option>
+                <option value="automatizacion">Automatización con Agentes IA</option>
+                <option value="ecommerce">Comercio Online</option>
+                <option value="defi">DeFi y Blockchain</option>
+                <option value="all">Todos / No estoy seguro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Cuéntanos sobre tu negocio *</label>
+              <textarea id="message" name="message" placeholder="¿Qué problema necesitas resolver? ¿Cuál es tu principal reto actual?" required></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn-primary">
+                <span>Enviar Solicitud →</span>
+              </button>
+              <span class="form-note">🔒 Sin spam. Respetamos tu privacidad.</span>
+            </div>
+          </form>
+        </div>
       </div>
-      <form class="contact-form fade-in slide-up">
-        <div class="form-group">
-          <label for="name">Nombre</label>
-          <input type="text" id="name" name="name" placeholder="Tu nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="tu@email.com" required>
-        </div>
-        <div class="form-group">
-          <label for="message">Mensaje</label>
-          <textarea id="message" name="message" placeholder="Describe tu proyecto o necesidad..." required></textarea>
-        </div>
-        <button type="submit" class="btn" style="align-self:flex-start"><span>Enviar Mensaje</span></button>
-      </form>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-links">
-        <a href="#">Twitter/X</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">Instagram</a>
-        <a href="#">YouTube</a>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">DIGIROQUE</div>
+          <p>Potenciando PYMES con Inteligencia Artificial, automatización y estrategias digitales que generan resultados reales.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Servicios</h5>
+          <a href="#servicios">Inteligencia Artificial</a>
+          <a href="#servicios">DeFi y Blockchain</a>
+          <a href="#servicios">Comercio Online</a>
+          <a href="#servicios">Automatización IA</a>
+        </div>
+        <div class="footer-col">
+          <h5>Empresa</h5>
+          <a href="#nosotros">Sobre Nosotros</a>
+          <a href="#planes">Planes</a>
+          <a href="#testimonios">Testimonios</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <a href="#contacto">Consultar Gratis</a>
+          <a href="mailto:hola@digiroque.com">hola@digiroque.com</a>
+          <a href="#">Chile</a>
+        </div>
       </div>
-      <p>&copy; 2026 DIGIROQUE por Roque Jiménez. Todos los derechos reservados.</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DIGIROQUE por Roque Jiménez. Todos los derechos reservados.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="YouTube">▶</a>
+        </div>
+      </div>
     </div>
   </footer>
 
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">↑</button>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
   <script>
-    // Header scroll
+    // Header scroll effect
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Hamburger
+    // Hamburger menu
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('nav');
     hamburger.addEventListener('click', () => {
@@ -217,14 +1862,14 @@
       });
     });
 
-    // IntersectionObserver animations
+    // Scroll animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
@@ -238,11 +1883,26 @@
       });
     });
 
-    // Form
-    document.querySelector('.contact-form').addEventListener('submit', (e) => {
+    // Contact form
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('¡Gracias por contactarnos! Te responderemos pronto.');
-      e.target.reset();
+      const btn = e.target.querySelector('.btn-primary span');
+      btn.textContent = '✅ ¡Enviado! Te contactamos pronto';
+      btn.parentElement.style.background = 'linear-gradient(135deg, #006400, #008000)';
+      setTimeout(() => {
+        btn.textContent = 'Enviar Solicitud →';
+        btn.parentElement.style.background = '';
+        e.target.reset();
+      }, 3000);
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 500);
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
