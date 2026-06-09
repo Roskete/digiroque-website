@@ -12,6 +12,18 @@
   <meta property="og:description" content="Potenciando PYMES con Inteligencia Artificial, DeFi y Automatización. Consulta gratuita.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/images/logo-main.jpg">
+  <meta property="og:url" content="https://digiroque.vercel.app">
+  <meta property="og:site_name" content="DIGIROQUE">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DIGIROQUE | Consultoría en IA, DeFi y Automatización para PYMES">
+  <meta name="twitter:description" content="Potenciando PYMES con Inteligencia Artificial, DeFi y Automatización. Más ventas, menos trabajo manual.">
+  <meta name="twitter:image" content="assets/images/logo-main.jpg">
+  <meta name="twitter:creator" content="@digiroque">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://digiroque.vercel.app">
 
   <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="assets/images/logo-main.jpg">
@@ -1296,9 +1308,155 @@
       box-shadow: 0 8px 30px rgba(192,0,48,0.4);
       transform: translateY(-2px);
     }
+
+    /* ========================================
+       PRELOADER
+       ======================================== */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .preloader-inner { text-align: center; }
+    .preloader-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.5rem;
+    }
+    .preloader-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(128,0,32,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .preloader-fill {
+      height: 100%;
+      background: var(--gradient);
+      border-radius: 3px;
+      animation: preloader-fill 1.2s ease forwards;
+    }
+    @keyframes preloader-fill {
+      0% { width: 0%; }
+      50% { width: 70%; }
+      100% { width: 100%; }
+    }
+
+    /* ========================================
+       FLOATING WHATSAPP BUTTON
+       ======================================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      z-index: 999;
+      transition: var(--transition);
+      animation: whatsapp-pulse 2s ease-in-out infinite;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(37,211,102,0.5);
+    }
+    .whatsapp-float svg {
+      width: 28px;
+      height: 28px;
+    }
+    .whatsapp-tooltip {
+      position: absolute;
+      right: 72px;
+      background: var(--bg-card);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: var(--transition);
+      pointer-events: none;
+      border: 1px solid rgba(128,0,32,0.2);
+    }
+    .whatsapp-float:hover .whatsapp-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    @keyframes whatsapp-pulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); }
+    }
   </style>
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DIGIROQUE",
+    "description": "Consultoría en Inteligencia Artificial, DeFi, Comercio Online y Automatización con Agentes de IA para PYMES.",
+    "url": "https://digiroque.com",
+    "logo": "assets/images/logo-main.jpg",
+    "founder": {
+      "@type": "Person",
+      "name": "Roque Jiménez"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Chile"
+    },
+    "serviceType": ["Inteligencia Artificial", "DeFi y Blockchain", "Comercio Online", "Automatización con Agentes IA"],
+    "priceRange": "$299 - $999",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "100"
+    },
+    "sameAs": [
+      "https://www.facebook.com/share/17msnMkN8j/",
+      "https://www.instagram.com/digiroque"
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <div class="preloader-logo">DIGIROQUE</div>
+      <div class="preloader-bar"><div class="preloader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP CTA -->
+  <a href="https://wa.me/53549118555?text=Hola%20DIGIROQUE%2C%20quiero%20una%20consulta%20gratuita" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <svg viewBox="0 0 32 32" fill="white" width="28" height="28"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.132 6.744 3.058 9.374L1.054 31.25l6.118-1.97A15.91 15.91 0 0016.004 32C24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.322 22.6c-.39 1.1-1.932 2.014-3.164 2.28-.84.18-1.936.324-5.626-1.206-4.726-1.958-7.762-6.76-7.996-7.074-.226-.314-1.896-2.524-1.896-4.814s1.2-3.41 1.628-3.882c.39-.428.922-.56 1.228-.56.302 0 .604.002.87.016.28.012.654-.106 1.016.774.39.954 1.324 3.228 1.44 3.464.114.236.19.51.038.824-.152.314-.226.51-.452.784-.226.274-.476.612-.678.824-.206.214-.42.446-.178.874.242.428 1.076 1.78 2.31 2.884 1.59 1.42 2.928 1.86 3.356 2.07.314.154.666.114.91-.19.314-.39.698-.984 1.09-1.586.282-.428.64-.48 1.074-.324.438.148 2.774 1.308 3.248 1.548.476.24.792.36.91.558.118.194.118 1.13-.274 2.228z"/></svg>
+    <span class="whatsapp-tooltip">¿Hablamos?</span>
+  </a>
 
   <!-- ==========================================
        HEADER
@@ -1710,25 +1868,25 @@
           <h3>Hablemos de tu <span>próximo nivel</span></h3>
           <p>Cuéntanos sobre tu negocio y tus objetivos. En 24 horas te contactamos con una propuesta personalizada sin compromiso.</p>
           <div class="contact-methods">
-            <a href="https://wa.me/56900000000" class="contact-method" target="_blank">
+            <a href="https://wa.me/53549118555" class="contact-method" target="_blank">
               <div class="method-icon">💬</div>
               <div class="method-text">
                 <div class="label">WhatsApp</div>
-                <div class="value">Respuesta inmediata</div>
+                <div class="value">+53 549 118 55</div>
               </div>
             </a>
-            <a href="mailto:hola@digiroque.com" class="contact-method">
+            <a href="mailto:roquejimenezpersonal@gmail.com" class="contact-method">
               <div class="method-icon">📧</div>
               <div class="method-text">
                 <div class="label">Email</div>
-                <div class="value">hola@digiroque.com</div>
+                <div class="value">roquejimenezpersonal@gmail.com</div>
               </div>
             </a>
             <div class="contact-method">
               <div class="method-icon">🌐</div>
               <div class="method-text">
                 <div class="label">Ubicación</div>
-                <div class="value">Chile — Trabajamos remoto</div>
+                <div class="value">Cuba — Trabajamos remoto</div>
               </div>
             </div>
           </div>
@@ -1750,7 +1908,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="phone">WhatsApp / Teléfono</label>
-                <input type="tel" id="phone" name="phone" placeholder="+56 9 0000 0000">
+                <input type="tel" id="phone" name="phone" placeholder="+53 549 118 55">
               </div>
               <div class="form-group">
                 <label for="business">Tipo de Negocio</label>
@@ -1819,17 +1977,15 @@
         <div class="footer-col">
           <h5>Contacto</h5>
           <a href="#contacto">Consultar Gratis</a>
-          <a href="mailto:hola@digiroque.com">hola@digiroque.com</a>
-          <a href="#">Chile</a>
+          <a href="mailto:roquejimenezpersonal@gmail.com">roquejimenezpersonal@gmail.com</a>
+          <a href="#">Cuba</a>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 DIGIROQUE por Roque Jiménez. Todos los derechos reservados.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="YouTube">▶</a>
+          <a href="https://www.facebook.com/share/17msnMkN8j/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
+          <a href="https://www.instagram.com/digiroque" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
         </div>
       </div>
     </div>
@@ -1842,6 +1998,13 @@
        JAVASCRIPT
        ========================================== -->
   <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 1400);
+    });
+
     // Header scroll effect
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -1883,16 +2046,33 @@
       });
     });
 
-    // Contact form
+    // Contact form → WhatsApp redirect
     document.getElementById('contactForm').addEventListener('submit', (e) => {
       e.preventDefault();
+      const f = e.target;
+      const name = f.querySelector('#name').value || 'Sin nombre';
+      const email = f.querySelector('#email').value || 'Sin email';
+      const phone = f.querySelector('#phone').value || '-';
+      const business = f.querySelector('#business').value || 'No especificado';
+      const service = f.querySelector('#service').value || 'No especificado';
+      const message = f.querySelector('#message').value || 'Sin mensaje';
+      const text = encodeURIComponent(
+        `Hola DIGIROQUE, quiero una consulta gratuita.\n\n` +
+        `👤 Nombre: ${name}\n` +
+        `📧 Email: ${email}\n` +
+        `📱 Tel: ${phone}\n` +
+        `🏢 Negocio: ${business}\n` +
+        `🔧 Servicio: ${service}\n` +
+        `💬 Mensaje: ${message}`
+      );
+      window.open(`https://wa.me/53549118555?text=${text}`, '_blank');
       const btn = e.target.querySelector('.btn-primary span');
-      btn.textContent = '✅ ¡Enviado! Te contactamos pronto';
+      btn.textContent = '✅ ¡Abriendo WhatsApp...';
       btn.parentElement.style.background = 'linear-gradient(135deg, #006400, #008000)';
       setTimeout(() => {
         btn.textContent = 'Enviar Solicitud →';
         btn.parentElement.style.background = '';
-        e.target.reset();
+        f.reset();
       }, 3000);
     });
 
