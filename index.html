@@ -42,6 +42,8 @@
       --accent: #c00030;
       --accent2: #a02040;
       --accent-light: #e05070;
+      --secondary: #d4a574;
+      --secondary-dim: rgba(212,165,116,0.15);
       --bg-dark: #0a0012;
       --bg-deep: #060010;
       --bg-card: #12001e;
@@ -256,11 +258,21 @@
     }
 
     .hero-content {
-      text-align: center;
-      max-width: 850px;
-      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
       position: relative;
       z-index: 2;
+    }
+    .hero-text {
+      text-align: left;
+    }
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
     }
 
     .hero-badge {
@@ -268,11 +280,11 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.5rem 1.4rem;
-      border: 1px solid rgba(192,0,48,0.35);
+      background: var(--secondary-dim);
       border-radius: 50px;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      color: var(--accent-light);
+      color: var(--secondary);
       margin-bottom: 2rem;
       background: rgba(192,0,48,0.06);
       backdrop-filter: blur(10px);
@@ -328,8 +340,41 @@
     .hero-buttons {
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 100%;
+    }
+    .hero-stat {
+      background: var(--bg-card);
+      border: 1px solid rgba(128,0,32,0.15);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .hero-stat:hover {
+      border-color: rgba(192,0,48,0.3);
+      transform: translateY(-2px);
+    }
+      background: var(--secondary-dim);
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--secondary);
+      line-height: 1.2;
+    }
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .btn-primary {
@@ -401,11 +446,11 @@
       margin-left: -10px;
       background: var(--bg-card);
       display: flex;
-      align-items: center;
-      justify-content: center;
+      background: var(--secondary-dim);
+      border-radius: 50px;
       font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--accent);
+      font-weight: 600;
+      color: var(--secondary);
     }
     .hero-social-proof .avatars .avatar:first-child { margin-left: 0; }
     .hero-social-proof .proof-text {
@@ -458,14 +503,22 @@
        BENEFITS SECTION
        ======================================== */
     .benefits {
-      padding: 6rem 0;
+      padding: 5rem 0;
       background: var(--bg-deep);
     }
 
     .benefits-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
+    }
+    .benefits-grid .benefit-card:nth-child(odd) {
+      text-align: left;
+    }
+    .benefits-grid .benefit-card:nth-child(even) {
+      text-align: right;
+      background: transparent;
+      border-color: rgba(128,0,32,0.08);
     }
 
     .benefit-card {
@@ -523,18 +576,18 @@
       display: inline-block;
       margin-top: 1rem;
       padding: 0.3rem 1rem;
-      background: rgba(192,0,48,0.1);
+      background: var(--secondary-dim);
       border-radius: 50px;
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      color: var(--accent-light);
+      color: var(--secondary);
     }
 
     /* ========================================
        WHY CHOOSE US
        ======================================== */
     .why-us {
-      padding: 6rem 0;
+      padding: 7rem 0;
     }
 
     .why-us-grid {
@@ -614,11 +667,11 @@
       text-align: center;
       margin-bottom: 2rem;
     }
-    .why-us-card .card-stat .big-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: var(--accent);
+      background: var(--secondary-dim);
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--secondary);
       line-height: 1;
     }
     .why-us-card .card-stat .label {
@@ -653,7 +706,7 @@
        SERVICES
        ======================================== */
     .services {
-      padding: 6rem 0;
+      padding: 5rem 0;
       background: var(--bg-deep);
     }
 
@@ -726,7 +779,7 @@
        TESTIMONIALS
        ======================================== */
     .testimonials {
-      padding: 6rem 0;
+      padding: 7rem 0;
     }
 
     .testimonials-grid {
@@ -794,7 +847,7 @@
        PRICING / PLANS
        ======================================== */
     .pricing {
-      padding: 6rem 0;
+      padding: 5rem 0;
       background: var(--bg-deep);
     }
 
@@ -930,7 +983,7 @@
        FAQ
        ======================================== */
     .faq {
-      padding: 6rem 0;
+      padding: 7rem 0;
     }
 
     .faq-list { max-width: 750px; margin: 0 auto; }
@@ -991,7 +1044,7 @@
        CONTACT
        ======================================== */
     .contact {
-      padding: 6rem 0;
+      padding: 5rem 0;
       background: var(--bg-deep);
     }
 
@@ -1286,7 +1339,7 @@
       transform: translateY(20px);
       transition: var(--transition);
       pointer-events: none;
-      z-index: 999;
+      z-index: 500;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1307,7 +1360,7 @@
     .preloader {
       position: fixed;
       inset: 0;
-      z-index: 9999;
+      z-index: 9000;
       background: var(--bg-dark);
       display: flex;
       align-items: center;
@@ -1362,7 +1415,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      z-index: 999;
+      z-index: 500;
       transition: var(--transition);
       animation: whatsapp-pulse 2s ease-in-out infinite;
     }
@@ -1379,11 +1432,11 @@
       right: 72px;
       background: var(--bg-card);
       color: var(--text);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
+      background: var(--secondary-dim);
+      border-radius: 50px;
+      font-size: 0.7rem;
       font-weight: 600;
-      white-space: nowrap;
+      color: var(--secondary);
       opacity: 0;
       transform: translateX(10px);
       transition: var(--transition);
@@ -1553,6 +1606,7 @@
   <section class="hero" id="hero">
     <div class="container">
       <div class="hero-content">
+        <div class="hero-text">
         <div class="hero-badge fade-in">
           <span class="pulse"></span>
           Consultoría Especializada en PYMES
@@ -1576,6 +1630,14 @@
             Ver Servicios
           </a>
         </div>
+        </div>
+        <div class="hero-visual fade-in delay-2">
+          <div class="hero-stats">
+            <div class="hero-stat"><div class="hero-stat-number">100+</div><div class="hero-stat-label">PYMES</div></div>
+            <div class="hero-stat"><div class="hero-stat-number">6+</div><div class="hero-stat-label">Años Exp.</div></div>
+            <div class="hero-stat"><div class="hero-stat-number">98%</div><div class="hero-stat-label">Satisfacción</div></div>
+            <div class="hero-stat"><div class="hero-stat-number">24/7</div><div class="hero-stat-label">Soporte</div></div>
+          </div>
         <div class="hero-social-proof fade-in delay-4">
           <div class="avatars">
             <div class="avatar">RC</div>
@@ -1583,7 +1645,8 @@
             <div class="avatar">JS</div>
             <div class="avatar">+</div>
           </div>
-          <span class="proof-text">Más de <strong>100+ PYMES</strong> ya transformaron su negocio</span>
+          <span class="proof-text">Clientes que ya confían en nosotros</span>
+        </div>
         </div>
       </div>
     </div>
